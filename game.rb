@@ -55,9 +55,8 @@ class Game
       return puts 'You won!' if c.sort == @your_combination.sort
 
       return puts 'You lost' if c.sort == @computer_combination.sort
-
-      puts 'No one won'
     end
+    puts 'No one won'
   end
 
   def text_greeting
