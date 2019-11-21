@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Game
   def initialize
     @your_combination = []
@@ -27,11 +29,11 @@ class Game
         @letter = input.chop
         @number = input.slice(1)
       else
-        puts "Choose values FROM THE BOARD"
+        puts 'Choose values FROM THE BOARD'
         exit
       end
     else
-      puts "Choose values FROM THE BOARD"
+      puts 'Choose values FROM THE BOARD'
       exit
     end
   end
@@ -43,20 +45,18 @@ class Game
   end
 
   def computer_combination
-    @computer_combination << ['A', 'B', 'C'].sample + rand(1..3).to_s
+    @computer_combination << %w[A B C].sample + rand(1..3).to_s
     puts ''
     puts "Computer's combination: #{@computer_combination}"
   end
 
   def winner
     COMBINATIONS.map do |c|
-    if c.sort == @your_combination.sort
-      return puts 'You won!'
-    elsif c.sort == @computer_combination.sort
-      return puts 'You lost'
-    else 
+      return puts 'You won!' if c.sort == @your_combination.sort
+
+      return puts 'You lost' if c.sort == @computer_combination.sort
+
       puts 'No one won'
-    end
     end
   end
 
