@@ -64,7 +64,7 @@ class Game
     puts ''
     puts "Hello, let's play a game :) "
     puts ''
-    puts ' | A | B | C |'
+    puts ' ͟|͟ ͟A͟ ͟|͟ ͟B͟ ͟|͟ ͟C͟ ͟|͟'
     puts '1|___|___|___|'
     puts '2|___|___|___|'
     puts '3|___|___|___|'
