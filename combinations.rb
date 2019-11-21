@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 COMBINATIONS = [
      ['A1', 'B2', 'C3'],
      ['A1', 'A2', 'A3'],

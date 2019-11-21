@@ -4,6 +4,11 @@ class Game
   def initialize
     @your_combination = []
     @computer_combination = []
+    @computer_strings = %w[
+      A1 A2 A3
+      B1 B2 B3
+      C1 C2 C3
+    ]
   end
 
   def order
@@ -21,33 +26,50 @@ class Game
   end
 
   def correct_values
-    puts 'Enter your turn: '
-    puts ''
+    enter_your_turn
     input = gets.chomp
     if input.chop == 'A' || input.chop == 'B' || input.chop == 'C'
       if input.slice(1) == '1' || input.slice(1) == '2' || input.slice(1) == '3'
         @letter = input.chop
         @number = input.slice(1)
       else
-        puts 'Choose values FROM THE BOARD'
+        only_values_from_the_board
         exit
       end
     else
-      puts 'Choose values FROM THE BOARD'
+      only_values_from_the_board
       exit
     end
   end
 
   def your_combination
-    @your_combination << "#{@letter}#{@number}"
-    puts ''
-    puts "Your combination: #{@your_combination}"
+    your_turn = "#{@letter}#{@number}"
+    if @your_combination.include?(your_turn)
+      you_had_this_turn
+      redo_turn
+    elsif @computer_combination.include?(your_turn)
+      computer_had_this_turn
+      redo_turn
+    else
+      computer_combination_logic(your_turn)
+      @your_combination << your_turn
+      puts ''
+      puts "Your combination: #{@your_combination}"
+    end
   end
 
   def computer_combination
-    @computer_combination << %w[A B C].sample + rand(1..3).to_s
+    @random_string_from_array = @computer_strings.sample
+    @computer_combination << @random_string_from_array
     puts ''
     puts "Computer's combination: #{@computer_combination}"
+    computer_combination_logic(@random_string_from_array)
+  end
+
+  def computer_combination_logic(element)
+    element_index = @computer_strings.find_index(element)
+    removed_element = @computer_strings.delete_at(element_index)
+    @computer_strings -= removed_element.split
   end
 
   def winner
@@ -59,14 +81,8 @@ class Game
     puts 'No one won'
   end
 
-  def text_greeting
-    puts ''
-    puts "Hello, let's play a game :) "
-    puts ''
-    puts ' ͟|͟ ͟A͟ ͟|͟ ͟B͟ ͟|͟ ͟C͟ ͟|͟'
-    puts '1|___|___|___|'
-    puts '2|___|___|___|'
-    puts '3|___|___|___|'
-    puts ''
+  def redo_turn
+    correct_values
+    your_combination
   end
 end
