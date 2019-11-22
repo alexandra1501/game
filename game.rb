@@ -59,11 +59,11 @@ class Game
   end
 
   def computer_combination
-    @random_string_from_array = @computer_strings.sample
-    @computer_combination << @random_string_from_array
+    random_string_from_array = @computer_strings.sample
+    @computer_combination << random_string_from_array
     puts ''
     puts "Computer's combination: #{@computer_combination}"
-    computer_combination_logic(@random_string_from_array)
+    computer_combination_logic(random_string_from_array)
   end
 
   def computer_combination_logic(element)
